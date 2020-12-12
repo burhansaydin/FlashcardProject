@@ -11,7 +11,7 @@ to_learn = {}
 try:
     data = pandas.read_csv("data/words_to_learn.csv")
 except FileNotFoundError:
-    original_data = pandas.read_csv("data/french_words.csv")
+    original_data = pandas.read_csv("data/german_words.csv", delimiter="\t")
     to_learn = original_data.to_dict(orient="records")
 else:
     to_learn = data.to_dict(orient="records")
@@ -21,8 +21,8 @@ def next_word():
     global current_card, flip_timer
     window.after_cancel(flip_timer)
     current_card = random.choice(to_learn)
-    current_word = current_card["French"]
-    canvas.itemconfig(card_title, text="French", fill="black")
+    current_word = current_card["German"]
+    canvas.itemconfig(card_title, text="German", fill="black")
     canvas.itemconfig(card_word, text=f"{current_word}", fill="black")
     canvas.itemconfig(card_background, image=new_image,)
     flip_timer = window.after(3000, func=flip_card)
